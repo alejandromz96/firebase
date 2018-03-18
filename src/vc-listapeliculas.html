@@ -17,6 +17,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+
 <link rel="import" href="../bower_components/polymerfire/polymerfire.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 
@@ -153,7 +154,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <!-- main panel -->
     <app-header-layout>
-      <div><paper-button raised on-tap="ayuda">AYUDA</paper-button></div>
+      
       <app-header effects="resize-title" condenses fixed shadow slot="header">
         <app-toolbar class="top-toolbar">
           <slot name="drawer-toggle"></slot>
@@ -165,12 +166,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </app-header>
 
       <div class="content">
+          <div><paper-button raised on-tap="ayuda">AYUDA</paper-button></div>
         <template is="dom-repeat" items="{{peliculas}}"><!-- No empty text node
         --><a href="#/detail/{{item.$key}}" class="card-container">
             <paper-card image="{{item.imageUrl}}">
               <div class="card-content">
                 <h2>{{item.titulo}}</h2>
-                <p>Genero <span>{{item.genero}}</span></p>
+                <p>Genero: <span>{{item.genero}}</span></p>
               </div>
             </paper-card>
           </a><!-- No empty text node
