@@ -1,9 +1,6 @@
 {
-  "name": "pesto",
-  "authors": [
-    "The Polymer Authors"
-  ],
-  "private": true,
+  "name": "operacion-triunfo",
+  "main": "index.html",
   "dependencies": {
     "app-layout": "polymerelements/app-layout#1 - 2",
     "app-route": "polymerelements/app-route#1 - 2",
@@ -45,5 +42,9 @@
         "polymer": "^1.9"
       }
     }
+  },
+  "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
   }
 }
