@@ -250,6 +250,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   </paper-listbox>
                 </app-header-layout>
               </app-drawer>
+              
         <!--      BARRA DE NAVEGACION     -->
         <app-header-layout>
             <app-header effects="resize-title" condenses fixed shadow slot="header">
@@ -276,7 +277,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         
                 <ot-cantantes name="cantantes"></ot-cantantes> 
         
-                <ot-perfil name="perfil"></ot-perfil>
+               <!-- <ot-perfil name="perfil"></ot-perfil> -->
         
                 <ot-equipo name="home"></ot-equipo>
         
@@ -285,6 +286,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <ot-duetos name="duetos"></ot-duetos>
         
                 <ot-verdueto id="detailDueto" name="detailDueto" duetoid="[[_idData.id]]"></ot-verdueto>
+
+                <ot-perfil id="perfil" name="perfil" user="[[user]]"></ot-perfil>
                 
               </iron-pages>
         </app-drawer-layout>

@@ -176,15 +176,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 text-align: center;
             }
         </style>
-        <!-- ------------------------------------------------------------------------------------>
-        <!-- Query para obtener a los usuario -->
-        <!-- <firebase-document
-      path="/Espectadores/{{espectadorid}}"
-      data="{{espectador}}">
-    </firebase-document>-->
+
         <!-- ------------------------------------------------------------------------------------>
         <!--Autenticacion con FIREBASE-->
-        <firebase-app auth-domain="videoclub-uah.firebaseapp.com" database-url="https://videoclub-uah.firebaseio.com/" api-key="AIzaSyCzATPikgLVLpTz8JfxDN13qMgk1uKfQF0">
+        <firebase-app auth-domain="practica2firebase.firebaseapp.com" database-url="https://practica2firebase.firebaseio.com/" api-key="AIzaSyBuCthX0RXuTeaqw1B39CzV7NCT0dkHZy4">
         </firebase-app>
 
         </firebase-app>
@@ -192,7 +187,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </firebase-auth>
         <!-- ------------------------------------------------------------------------------------>
 
-
+        <firebase-query id="queryLogin" path="/Espectadores" data="{{espectadores}}">
+        </firebase-query>
 
         <!-- Patrón de rutas de navegación -->
         <app-location route="{{_route}}" use-hash-as-path></app-location>
@@ -215,7 +211,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <div class="grid-item">
                     <h1>Bienvenido a la aplicacion de OT</h1>
                     <paper-button raised on-tap="_abrirventanalogin" toggles id="buttonLogin">Entrar</paper-button>
-                </div> 
+                </div>
             </div>
             <ot-app name="usuario"></ot-app>
             <ot-appadmin name="admin"></ot-appadmin>
@@ -232,7 +228,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
                 recipes: Object,
 
-                pepe:String,
+                pepe: String,
 
                 _route: Object,
 
@@ -295,11 +291,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             _calculalogado: function (usuario) {
                 if (this.$.auth.user === undefined || this.$.auth.user === null)
                     return "login";
-                else{  
-                    if(this.$.auth.user.email==="rbn.perez.ortiz@gmail.com"){
+                else {
+                    if (this.$.auth.user.email === "rbn.perez.ortiz@gmail.com") {
                         return "admin";
                     }
-                    else{
+                    else {
+                        var dataLogin = {
+                            creditos: 50,
+                            email: this.user.email,
+                            imagen: this.user.photoURL,
+                            nombre: this.user.displayName
+                        };
+
+                        this.$.queryLogin.ref.child(this.user.uid).update(dataLogin);
                         return "usuario";
                     }
                 }
