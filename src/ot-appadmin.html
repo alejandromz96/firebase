@@ -36,16 +36,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 
 
-<link rel="import" href="ot-cantantes.html">
-<link rel="import" href="ot-ingreso.html">
-<link rel="import" href="ot-duetos.html">
-<link rel="import" href="ot-equipo.html">
-<link rel="import" href="ot-gala.html">
-<link rel="import" href="ot-perfil.html">
-<link rel="import" href="ot-ranking.html">
+
 <link rel="import" href="ot-verdueto.html">
 <link rel="import" href="ot-vercantante.html">
 <link rel="import" href="app-icons.html">
+<link rel="import" href="admin/ot-gestionusuarios.html">
+<link rel="import" href="admin/ot-gestioncantantes.html">
+<link rel="import" href="admin/ot-gestionduetos.html">
+<link rel="import" href="admin/ot-gestiongalas.html">
+
+<link rel="import" href="admin/ot-delcantante.html">
+<link rel="import" href="admin/ot-deldueto.html">
+<link rel="import" href="admin/ot-delgala.html">
+<link rel="import" href="admin/ot-deluser.html">
+
+<link rel="import" href="admin/ot-newuser.html">
+<link rel="import" href="admin/ot-newcantante.html">
+<link rel="import" href="admin/ot-newdueto.html">
+<link rel="import" href="admin/ot-newgala.html">
+
+<link rel="import" href="admin/ot-updateuser.html">
+<link rel="import" href="admin/ot-updatecantante.html">
+<link rel="import" href="admin/ot-updatedueto.html">
+<link rel="import" href="admin/ot-updategala.html">
+
 
 <dom-module id="ot-appadmin">
 
@@ -237,7 +251,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     <a href="#/perfil" name="perfil">Gestion Usuarios</a>
                   </paper-item>
                   <paper-item name="home">
-                    <a href="#/home" name="home">Gestion Galas</a>
+                    <a href="#/galas" name="galas">Gestion Galas</a>
                   </paper-item>
                   <paper-item name="ranking">
                     <a href="#/ranking" name="ranking">Gestion Ranking</a>
@@ -263,11 +277,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <div main-title></div>
             </app-toolbar>
           </div>
-          <a href="#/perfil" id="btnPerfil"><paper-button>Gestion Usuarios</paper-button></a>
-          <a href="#/home" id="btnHome"><paper-button>Gestion Galas</paper-button></a>
-          <a href="#/ranking" id="btnRanking"><paper-button>Gestion Ranking</paper-button></a>
-          <a href="#/cantantes" id="btnCantantes"><paper-button>Gestion Cantantes</paper-button></a>
-          <a href="#/duetos" id="btnDuetos"><paper-button>Gestion Duetos</paper-button></a>
+          <a href="#/perfil" id="btnNav"><paper-button>Gestion Usuarios</paper-button></a>
+          <a href="#/galas" id="btnNav"><paper-button>Gestion Galas</paper-button></a>
+          <a href="#/ranking" id="btnNav"><paper-button>Gestion Ranking</paper-button></a>
+          <a href="#/cantantes" id="btnNav"><paper-button>Gestion Cantantes</paper-button></a>
+          <a href="#/duetos" id="btnNav"><paper-button>Gestion Duetos</paper-button></a>
           </app-header>
         </app-header-layout>
       
@@ -275,17 +289,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <!-- list/detail pages -->
             <iron-pages selected="[[_selectedPage]]" attr-for-selected="name">
       
-              <ot-cantantes name="cantantes"></ot-cantantes> 
+              <ot-gestioncantantes name="cantantes"></ot-gestioncantantes> 
       
-              <ot-perfil name="perfil"></ot-perfil>
+              <ot-gestionusuarios name="perfil"></ot-gestionusuarios>
       
-              <ot-equipo name="home"></ot-equipo>
+              <ot-gestiongalas name="galas"></ot-gestiongalas>
       
               <ot-ranking name="ranking"></ot-ranking>
       
-              <ot-ingreso name="duetos"></ot-ingreso>
+              <ot-gestionduetos name="duetos"></ot-gestionduetos>
       
               <ot-verdueto id="detailDueto" name="detailDueto" duetoid="[[_idData.id]]"></ot-verdueto>
+
+              <ot-newuser name="newuser"></ot-newuser>
+              <ot-newdueto name="newuser"></ot-newdueto>
+              <ot-newgala name="newuser"></ot-newgala>
+              <ot-newcantante name="newuser"></ot-newcantante>
+              
+              <ot-delcantante name="delcantante"></ot-delcantante>
+              <ot-deldueto name="deldueto"></ot-deldueto>
+              <ot-delgala name="delgala"></ot-delgala>
+              <ot-deluser name="deluser"></ot-deluser>
+
+              <ot-updatecantante name="updatecantante"></ot-updatecantante>
+              <ot-updatedueto name="updatedueto"></ot-updatedueto>
+              <ot-updategala name="updategala"></ot-updategala>
+              <ot-updateuser name="updateuser"></ot-updateuser>
               
             </iron-pages>
       </app-drawer-layout>

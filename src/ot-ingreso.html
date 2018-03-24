@@ -8,19 +8,6 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 <link rel="import" href="../bower_components/polymerfire/polymerfire.html">
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
@@ -162,14 +149,14 @@ data="{{peliculas}}">
                 <paper-carousel items="1" dotText="true" controls="true" name="duetos" dots="true" loop="true" autoplay="true" autoplaytime="5000" >
                         <template is="dom-repeat" items="{{peliculas}}">
                         <div> <a href="#/detail/{{item.$key}}" class="card-container">
-                            <paper-card id="card1"  class="imagentam" image="{{item.imageUrl}}">
+                            <paper-card id="card1" class="imagentam" image="{{item.imageUrl}}">
                               <div class="card-content">
                                 <h2>{{item.titulo}}</h2>  
                                 <p>Genero: <span>{{item.genero}}</span></p>
                               </div>
                             </a>
                               <div  class="card-action">
-                                  <paper-button id="buttonSel" onclick="{{_asignar}}">Seleccionar</paper-button>
+                                  <paper-button id="buttonSel" on-tap="_asignar">Seleccionar</paper-button>
                               </div>
                             </paper-card>
                         </div>
@@ -275,7 +262,7 @@ data="{{peliculas}}">
       /************************************************************************************************/
 
       user: Object,
-      aux1:Object,
+      aux1: String,
     
       /************************************************************************************************/
 
@@ -322,8 +309,10 @@ data="{{peliculas}}">
       this.$.auth.signOut();
     },
     _asignar:function(){
+        
         var dueto = document.querySelector('#dueto1');
         var elemento = document.querySelector(this.$.card1);
+        console.log(elemento);
         var imagen = elemento.getAttribute('image');
         dueto.setAttribute('image',imagen)    
     },
