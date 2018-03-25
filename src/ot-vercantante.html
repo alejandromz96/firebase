@@ -112,8 +112,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
 
     <firebase-document
-      path="/peliculas/{{peliculaid}}"
-      data="{{pelicula}}">
+      path="/Cantantes/{{peliculaid}}"
+      data="{{cantante}}">
     </firebase-document>
 
     <!-- main panel -->
@@ -147,7 +147,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       <div class="card-container">
 
-        <paper-card heading="{{pelicula.titulo}}">
+        <paper-card heading="{{cantante.nombre}}">
           <div class="card-content">
 
               <google-youtube
@@ -187,42 +187,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     properties: {
 
-      peliculaid:{
+      cantanteid:{
         type:String
       },
 
-      pelicula: {
+      cantante: {
         type: Object,
-        observer: '__peliculaChanged'
-      },
-
-      __favorite: {
-        type: Boolean,
-        value: false
+        observer: '__cantanteChanged'
       }
 
     },
 
+/*
     __actores: function(pelicula){
       if (pelicula.actores) {
         return Object.values(pelicula.actores); 
       }
     },
-
-    __peliculaChanged: function(pelicula) {
-      if (pelicula) {
-        this.style.backgroundImage = 'url(' + pelicula.imageUrl + ')';
+*/
+    __cantanteChanged: function(cantante) {
+      if (cantante) {
+        this.style.backgroundImage = 'url(' + cantante.imagen + ')';
       }
-    },
-
-    __toggleFavorite: function(event, detail) {
-      this.__favorite = !this.__favorite;
-    },
-
-    __computeFavIcon: function(favorite) {
-      return favorite ? 'app:favorite' : 'app:favorite-border';
     }
-
   });
 
   </script>
