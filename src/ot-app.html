@@ -33,6 +33,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../bower_components/polymerfire/polymerfire.html">
 
+<link rel="import" href="../bower_components/firebase-query/firebase-query.html">
 
 
 
@@ -189,6 +190,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <app-route route="{{_route}}" pattern="/:page" data="{{_pageData}}" tail="{{_subRoute}}"></app-route>
     <app-route route="{{_subRoute}}" pattern="/:id" data="{{_idData}}"></app-route>
 
+    <firebase-query id="query" path="/Cantantes" data="{{cantantes}}">
+    </firebase-query>
 
 
     <!-- ------------------------------------------------------------------------------------>
