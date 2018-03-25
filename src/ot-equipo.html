@@ -12,6 +12,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
 
 <link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
@@ -19,7 +20,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
 
 <link rel="import" href="../bower_components/polymerfire/polymerfire.html">
-<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-document.html">
+
 
 <dom-module id="ot-equipo">
   <template>
@@ -106,8 +108,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <!-------------------------------------------------------------------------------------------------------->
     <firebase-auth user="{{user}}"></firebase-auth>
 
-    <firebase-query id="queryEspectadores" path="Espectadores/[[user.uid]]" data="{{espectadores}}">
-    </firebase-query>
+    <firebase-document id="queryEspectadores" path="Espectadores/[[user.uid]]" data="{{espectador}}">
+    </firebase-document>
 
     <firebase-query id="queryCantantes" path="/Cantantes" data="{{cantantes}}">
     </firebase-query>
@@ -126,6 +128,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <template is="dom-repeat" items="{{prueba}}">
           <!-- No empty text node
         -->
+        <template is="dom-if" if="{{_isIn(item)}}">
           <a href="#/detail/{{item.$key}}" class="card-container">
             <paper-card image="{{item.imagen}}">
               <div class="card-content">
@@ -136,6 +139,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               </div>
             </paper-card>
           </a>
+        </template>
           <!-- No empty text node
       -->
         </template>
@@ -173,9 +177,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       funcionCambio: function () {
         console.log(this.duetos);
         this.prueba = this.cantantes;
-       /* this.cantantes = {
-
-        };*/
+        var prueba2 = [];
+        var i = 0;
+        for (var cantante in this.cantantes) {
+          console.log(this.cantantes[i]);
+          prueba2 += Object.values(this.cantantes[i]);
+          i++;
+        }
+        console.log(prueba2);
       },
 
 
@@ -186,6 +195,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       redirigir: function () {
         location.href = '#/home';
       },
+      
+      _isIn: function(item) {
+        console.log("Espectador");
+        console.log(this.espectador.cantante1);
+        console.log(item.$key);
+        return this.espectador.cantante1 == item.$key || this.espectador.cantante2 == item.$key;
+      },
+
 
       _calculaespectador: function () {
         console.log(this.$.queryCantantes.value);
