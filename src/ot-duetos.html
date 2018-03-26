@@ -109,15 +109,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
 
-    <firebase-query id="query" path="/Duetos" data="{{duetos}}">
-    </firebase-query>
-
     <app-header-layout>
       <div class="content">
         <h1>Duetos</h1>
         <br>
         <template is="dom-repeat" items="{{duetos}}">
-          <div class="card-container">
+          <a href="#/detailDueto/{{item.$key}}" class="card-container">
             <paper-card image="{{item.imagen}}">
               <div class="card-content">
                 <div class="card-header">
@@ -139,7 +136,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 </iron-collapse>
               </div>
             </paper-card>
-          </div>
+          </a>
         </template>
       </div>
     </app-header-layout>
