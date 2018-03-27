@@ -184,10 +184,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </firebase-document>-->
         <!-- ------------------------------------------------------------------------------------>
         <!--Autenticacion con FIREBASE-->
-        <firebase-app auth-domain="videoclub-uah.firebaseapp.com" database-url="https://videoclub-uah.firebaseio.com/" api-key="AIzaSyCzATPikgLVLpTz8JfxDN13qMgk1uKfQF0">
+        <firebase-app 
+            auth-domain="practica2firebase.firebaseapp.com" 
+            database-url="https://practica2firebase.firebaseio.com/" 
+            api-key="AIzaSyBuCthX0RXuTeaqw1B39CzV7NCT0dkHZy4">
         </firebase-app>
 
-        </firebase-app>
         <firebase-auth id="auth" user="{{user}}" provider="google">
         </firebase-auth>
         <!-- ------------------------------------------------------------------------------------>
@@ -296,7 +298,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 if (this.$.auth.user === undefined || this.$.auth.user === null)
                     return "login";
                 else{  
-                    if(this.$.auth.user.email==="rbn.perez.ortiz@gmail.com"){
+                    if(this.$.auth.user.email==="adm.firebase@gmail.com@gmail.com"){
                         return "admin";
                     }
                     else{

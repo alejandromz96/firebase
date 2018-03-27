@@ -33,6 +33,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../bower_components/polymerfire/polymerfire.html">
 
+<link rel="import" href="../bower_components/firebase-query/firebase-query.html">
+
 
 
 
@@ -189,7 +191,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         pattern="/:id"
         data="{{_idData}}"></app-route>
 
-
+    <firebase-query id="query" path="/Cantantes" data="{{cantantes}}">
+    </firebase-query>
+    
+    <firebase-query id="query" path="/Duetos" data="{{duetos}}">
+    </firebase-query>
 
     <!-- ------------------------------------------------------------------------------------>
                                 <!--REGISTRO-->
@@ -274,7 +280,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <!-- list/detail pages -->
               <iron-pages selected="[[_selectedPage]]" attr-for-selected="name">
         
-                <ot-cantantes name="cantantes"></ot-cantantes> 
+                <ot-cantantes name="cantantes"  cantantes="[[cantantes]]"></ot-cantantes> 
         
                 <ot-perfil name="perfil"></ot-perfil>
         
@@ -282,11 +288,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         
                 <ot-ranking name="ranking"></ot-ranking>
         
-                <ot-duetos name="duetos"></ot-duetos>
-
-    
+                <ot-duetos name="duetos" duetos="[[duetos]]"></ot-duetos>
         
-                <ot-verdueto id="detailDueto" name="detailDueto" duetoid="[[_idData.id]]"></ot-verdueto>
+                <ot-vercantante id="detailCantante" name="detailCantante" cantante="[[_getCantante(cantantes, _idData.id)]]"></ot-vercantante>
+
+                <ot-verdueto id="detailDueto" name="detailDueto" dueto="[[_getDueto(duetos, _idData.id)]]"></ot-verdueto>
                 
               </iron-pages>
         </app-drawer-layout>
@@ -338,16 +344,28 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       });
     }, 
 
-    _getRecipe: function() {
-      if (this.recipes && this._idData && this._idData.id) {
-        for (var i = 0; i < this.recipes.length; ++i) {
-          var r = this.recipes[i];
-          if (r.id === this._idData.id) {
-            return r;
+     _getCantante: function () {
+        if (this.cantantes && this._idData && this._idData.id) {
+          for (var i = 0; i < this.cantantes.length; ++i) {
+            var r = this.cantantes[i];
+            if (r.$key === this._idData.id) {
+              return r;
+            }
           }
         }
-      }
-      return null;
+        return null;
+    },
+
+    _getDueto: function () {
+        if (this.duetos && this._idData && this._idData.id) {
+          for (var i = 0; i < this.duetos.length; ++i) {
+            var r = this.duetos[i];
+            if (r.$key === this._idData.id) {
+              return r;
+            }
+          }
+        }
+        return null;
     },
 
     _drawerSelected: function() {
@@ -355,12 +373,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     },
 
     /************************************************************************************************/
-
-    _calculatipo: function(usuario){
-      //return  ((this.$.auth.user===undefined || this.$.auth.user===null)?"login":"usuario");
-      return ((this.$.auth.user.email==="rbn.perez.ortiz@gmail.com")?"admin":"usuario");
-    },
-
     _abrirventanalogin: function(){
       return this.$.auth.signInWithPopup();
     },
