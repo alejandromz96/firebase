@@ -33,7 +33,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../bower_components/polymerfire/polymerfire.html">
 
-<link rel="import" href="../bower_components/firebase-query/firebase-query.html">
 
 
 
@@ -46,6 +45,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="user/ot-ranking.html">
 <link rel="import" href="user/ot-verdueto.html">
 <link rel="import" href="user/ot-vercantante.html">
+<link rel="import" href="ot-ingreso.html">
 <link rel="import" href="app-icons.html">
 
 <dom-module id="ot-app">
@@ -160,7 +160,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       --paper-icon-button-ink-color: white;
     }
     #btnNav{
-      text-decoration:#fff;
+      text-decoration:none;
       color: rgb(255, 255, 255);
     }
 
@@ -195,6 +195,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </firebase-query>
     
     <firebase-query id="query" path="/Duetos" data="{{duetos}}">
+    </firebase-query>
+
+    <firebase-query id="query" path="/Espectadores" data="{{espectadores}}">
     </firebase-query>
 
     <!-- ------------------------------------------------------------------------------------>
@@ -268,11 +271,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <div main-title></div>
               </app-toolbar>
             </div>
-            <a href="#/perfil" id="btnPerfil"><paper-button>Perfil</paper-button></a>
-            <a href="#/home" id="btnHome"><paper-button>Equipo</paper-button></a>
-            <a href="#/ranking" id="btnRanking"><paper-button>Ranking</paper-button></a>
-            <a href="#/cantantes" id="btnCantantes"><paper-button>Cantantes</paper-button></a>
-            <a href="#/duetos" id="btnDuetos"><paper-button>Duetos</paper-button></a>
+            <a href="#/perfil" id="btnNav"><paper-button>Perfil</paper-button></a>
+            <a href="#/home" id="btnNav"><paper-button>Equipo</paper-button></a>
+            <a href="#/ranking" id="btnNav"><paper-button>Ranking</paper-button></a>
+            <a href="#/cantantes" id="btnNav"><paper-button>Cantantes</paper-button></a>
+            <a href="#/duetos" id="btnNav"><paper-button>Duetos</paper-button></a>
+            <a href="#/ingreso" id="btnNav"><paper-button>Ingreso</paper-button></a>
             </app-header>
           </app-header-layout>
         
@@ -286,14 +290,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         
                 <ot-equipo name="home"></ot-equipo>
         
-                <ot-ranking name="ranking"></ot-ranking>
+                <ot-ranking name="ranking" espectadores = "[[espectadores]]"></ot-ranking>
         
                 <ot-duetos name="duetos" duetos="[[duetos]]"></ot-duetos>
         
                 <ot-vercantante id="detailCantante" name="detailCantante" cantante="[[_getCantante(cantantes, _idData.id)]]"></ot-vercantante>
 
                 <ot-verdueto id="detailDueto" name="detailDueto" dueto="[[_getDueto(duetos, _idData.id)]]"></ot-verdueto>
-                
+                <ot-ingreso name="ingreso"> </ot-ingreso>
               </iron-pages>
         </app-drawer-layout>
   </template>
@@ -306,7 +310,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     properties: {
 
-      recipes: Object,
+      cantantes: Object,
+
+      duetos: Object,
+
+      espectadores: Object,
 
       _route: Object,
 
@@ -320,6 +328,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       _selectedPage: String,
 
       _idData: Object,
+
+
       
       /************************************************************************************************/
 
