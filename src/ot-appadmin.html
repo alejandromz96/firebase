@@ -328,8 +328,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     properties: {
 
-      recipes: Object,
-
       _route: Object,
 
       _subRoute: Object,
@@ -364,19 +362,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
       });
     }, 
-
-    _getRecipe: function() {
-      if (this.recipes && this._idData && this._idData.id) {
-        for (var i = 0; i < this.recipes.length; ++i) {
-          var r = this.recipes[i];
-          if (r.id === this._idData.id) {
-            return r;
-          }
-        }
-      }
-      return null;
-    },
-
     _drawerSelected: function() {
       if (!this.$.drawer.persistent) this.$.drawer.close();
     },

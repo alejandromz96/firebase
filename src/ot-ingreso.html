@@ -134,29 +134,41 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <!-------------------------------------------------------------------------------------------->        
 <!--------------------------------    PARTE DEL ADMINISTRADOR       -------------------------->        
 <!-------------------------------------------------------------------------------------------->        
-<firebase-query
-id="query"
-path="/peliculas"
-data="{{peliculas}}">
+<firebase-query id="query" path="/Cantantes" data="{{cantantes}}">
 </firebase-query>
-    
+
+<firebase-query id="query" path="/Duetos" data="{{duetos}}">
+</firebase-query>
+
 <div class="grid-container" name="login">
         <div class="grid-item">
                 <h1 >Selecciona un dueto y dos cantante</h1>
         </div>
         <div class="grid-item">
             <div>
-                <paper-carousel items="1" dotText="true" controls="true" name="duetos" dots="true" loop="true" autoplay="true" autoplaytime="5000" >
-                        <template is="dom-repeat" items="{{peliculas}}">
-                        <div> <a href="#/detail/{{item.$key}}" class="card-container">
-                            <paper-card id="card1" class="imagentam" image="{{item.imageUrl}}">
+                <paper-carousel items="1" dotText="true" controls="true" name="cantantes" dots="true" loop="true" autoplay="true" autoplaytime="5000" >
+                        <template is="dom-repeat" items="{{cantantes}}">
+                          <a href="#/detailCantante/{{item.$key}}" class="card-container">
+                            <paper-card image="{{item.imagen}}">
                               <div class="card-content">
-                                <h2>{{item.titulo}}</h2>  
-                                <p>Genero: <span>{{item.genero}}</span></p>
+                                <div class="card-header">
+                                  {{item.nombre}}
+                                  <div class="icon-price icon-text">
+                                    <iron-icon src="../image/coin-money-1.png" style="width: 14px; height: 14px;"></iron-icon>
+                                    <span>{{item.precio}} cr</span>
+                                  </div>
+                                </div>
+                                <paper-button class="indigo">Ver detalle</paper-button>
                               </div>
                             </a>
                               <div  class="card-action">
                                   <paper-button id="buttonSel" on-tap="_asignar">Seleccionar</paper-button>
+                                  <paper-button>Descripción</paper-button>
+                                  <paper-icon-button icon="expand-more" title="Descripcion" on-tap="_toggle" data-args="{{index}}" style="float:right;">
+                                  </paper-icon-button>
+                                  <iron-collapse id="descripcionCantante{{index}}" style="width:100%; margin: 4px; font-size: 15px; color: #999;">
+                                    {{item.descripcion}}
+                                  </iron-collapse>
                               </div>
                             </paper-card>
                         </div>
@@ -167,17 +179,30 @@ data="{{peliculas}}">
 
         <div class="grid-item">
             <div>
-                <paper-carousel items="1" dotText="true" controls="true" name="cantantes" dots="true" loop="true" autoplay="true" autoplaytime="5000" >
-                        <template is="dom-repeat" items="{{peliculas}}">
-                       <div> <a href="#/detail/{{item.$key}}" class="card-container">
-                            <paper-card class="imagentam" image="{{item.imageUrl}}" >
+                <paper-carousel items="1" dotText="true" controls="true" name="duetos" dots="true" loop="true" autoplay="true" autoplaytime="5000" >
+                        <template is="dom-repeat" items="{{duetos}}">
+                          <a href="#/detailDueto/{{item.$key}}" class="card-container">
+                            <paper-card image="{{item.imagen}}">
                               <div class="card-content">
-                                <h2>{{item.titulo}}</h2>
-                                <p>Genero: <span>{{item.genero}}</span></p>
+                                <div class="card-header">
+                                  {{item.cantante1}} y {{item.cantante2}}
+                                  <div class="icon-price icon-text">
+                                    <iron-icon src="../image/coin-money-1.png" style="width: 14px; height: 14px;"></iron-icon>
+                                    <span>{{item.precio}} cr</span>
+                                  </div>
+                                  <p>Puntuación: {{item.puntuacionTotal}}</p>
+                                </div>
+                                <paper-button class="indigo">Ver detalle</paper-button>
                               </div>
                             </a>
                               <div class="card-action">
                                     <paper-button id="buttonSel">Seleccionar</paper-button>
+                                    <paper-button>Descripción</paper-button>
+                                    <paper-icon-button icon="expand-more" title="Descripcion" on-tap="_toggle" data-args="{{index}}" style="float:right;">
+                                    </paper-icon-button>
+                                    <iron-collapse id="descripcionDueto{{index}}" style="width:100%; margin: 4px; font-size: 15px; color: #999;">
+                                      {{item.descripcion}}
+                                    </iron-collapse>
                                 </div>
                             </paper-card>
                           </div>
@@ -281,18 +306,6 @@ data="{{peliculas}}">
         }
       });
     }, 
-
-    _getRecipe: function() {
-      if (this.recipes && this._idData && this._idData.id) {
-        for (var i = 0; i < this.recipes.length; ++i) {
-          var r = this.recipes[i];
-          if (r.id === this._idData.id) {
-            return r;
-          }
-        }
-      }
-      return null;
-    },
 
     _drawerSelected: function() {
       if (!this.$.drawer.persistent) this.$.drawer.close();
