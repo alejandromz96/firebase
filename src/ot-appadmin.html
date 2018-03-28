@@ -214,6 +214,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <firebase-query id="query" path="/Duetos" data="{{duetos}}">
         </firebase-query>
 
+        <firebase-query id="query" path="/Espectadores" data="{{usuarios}}">
+        </firebase-query>
+
 
 
     <!-- ------------------------------------------------------------------------------------>
@@ -257,8 +260,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     selected="[[_pageData.page]]"
                     attr-for-selected="name"
                     on-iron-activate="_drawerSelected">
-                  <paper-item name="perfil">
-                    <a href="#/perfil" name="perfil">Gestion Usuarios</a>
+                  <paper-item name="usuarios">
+                    <a href="#/usuarios" name="usuarios">Gestion Usuarios</a>
                   </paper-item>
                   <paper-item name="home">
                     <a href="#/galas" name="galas">Gestion Galas</a>
@@ -287,7 +290,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <div main-title></div>
             </app-toolbar>
           </div>
-          <a href="#/perfil" id="btnNav"><paper-button>Gestion Usuarios</paper-button></a>
+          <a href="#/usuarios" id="btnNav"><paper-button>Gestion Usuarios</paper-button></a>
           <a href="#/galas" id="btnNav"><paper-button>Gestion Galas</paper-button></a>
           <a href="#/ranking" id="btnNav"><paper-button>Gestion Ranking</paper-button></a>
           <a href="#/cantantes" id="btnNav"><paper-button>Gestion Cantantes</paper-button></a>
@@ -301,7 +304,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       
               <ot-gestioncantantes name="cantantes" cantantes="[[cantantes]]"></ot-gestioncantantes> 
       
-              <ot-gestionusuarios name="perfil"></ot-gestionusuarios>
+              <ot-gestionusuarios name="usuarios" usuarios="[[usuarios]]"></ot-gestionusuarios>
       
               <ot-gestiongalas name="galas"></ot-gestiongalas>
       
@@ -342,6 +345,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       cantantes: Object,
 
       duetos: Object,
+
+      usuarios: Object,
       
       _route: Object,
 
